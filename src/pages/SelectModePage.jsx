@@ -1,6 +1,8 @@
 import React from 'react'
 import SelectModeCard from '../components/SelectModeCard'
 import BackButton from '../components/BackButton'
+import BackgroundSelectMode from '../backgrounds/BackgroundSelectMode'
+import { Link } from 'react-router-dom'
 
 const SelectModePage = () => {
     const firstCard = "Play Classic"
@@ -11,18 +13,18 @@ const SelectModePage = () => {
 
     return (
       <div className="bg-yellow-500 relative w-full h-screen overflow-hidden">
-        {/* Botón en su capa absoluta */}
+        <BackgroundSelectMode/>
         <div className="absolute top-4 left-4">
           <BackButton backPath="/" />
         </div>
-
-        {/* Contenido centrado */}
         <div className="flex flex-col lg:flex-row items-center justify-center h-full gap-6 lg:gap-10">
+          <Link to="/select-single" className='z-40'>
           <SelectModeCard 
             selectText={firstCard} 
             selectPath={onePlayerIcon} 
             bgClass="bg-orange-600"
           /> 
+          </Link>
           <SelectModeCard 
             selectText={secondCard} 
             selectPath={multiPlayerIcon} 

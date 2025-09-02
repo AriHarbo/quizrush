@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import HomeContent from '../components/HomeContent'
-import BackgroundHome from '../components/BackgroundHome'
+import BackgroundHome from '../backgrounds/BackgroundHome.jsx'
 
 const Home = () => {
 

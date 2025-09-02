@@ -5,6 +5,7 @@ import './App.css'
 import Home from './pages/Home.jsx'
 import { Route, Routes } from 'react-router-dom'
 import SelectModePage from './pages/SelectModePage.jsx'
+import SelectSingleGamePage from './pages/SelectSingleGamePage.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/select-mode" element={<SelectModePage/>}/>
+          <Route path="/select-single" element={<SelectSingleGamePage/>}/>
         </Routes>
     </>
   )

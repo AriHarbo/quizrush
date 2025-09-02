@@ -2,7 +2,7 @@ import React from 'react'
 
 const SelectModeCard = ({selectText, selectPath, bgClass}) => {
   return (
-    <div className={`w-72 md:w-100 sm:w-56 aspect-square ${bgClass} 
+    <div className={`z-40 w-72 md:w-100 sm:w-56 aspect-square ${bgClass} 
               rounded-4xl shadow-lg p-4 sm:p-6 md:p-6 
               flex flex-col items-center justify-center text-center 
               border-8 border-white cursor-pointer 
