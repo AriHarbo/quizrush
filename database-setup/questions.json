@@ -1,0 +1,162 @@
+[
+  {
+    "question": "¿Cuál es el río más largo del mundo?",
+    "options": ["Nilo", "Amazonas", "Misisipi", "Yangtsé"],
+    "correctAnswer": 0,
+    "category": "geografía",
+    "difficulty": "media",
+    "explanation": "El río Nilo, con aproximadamente 6,650 km de longitud, es considerado el más largo del mundo."
+  },
+  {
+    "question": "¿Quién pintó 'La noche estrellada'?",
+    "options": ["Pablo Picasso", "Vincent van Gogh", "Salvador Dalí", "Claude Monet"],
+    "correctAnswer": 1,
+    "category": "arte",
+    "difficulty": "media",
+    "explanation": "Vincent van Gogh pintó 'La noche estrellada' en 1889 durante su estancia en un asilo en Saint-Rémy-de-Provence."
+  },
+  {
+    "question": "¿Cuál es el elemento químico con símbolo 'O'?",
+    "options": ["Oro", "Osmio", "Oxígeno", "Oganesón"],
+    "correctAnswer": 2,
+    "category": "ciencia",
+    "difficulty": "fácil",
+    "explanation": "El oxígeno es un elemento químico con símbolo 'O' y número atómico 8."
+  },
+  {
+    "question": "¿En qué año cayó el muro de Berlín?",
+    "options": ["1987", "1989", "1991", "1985"],
+    "correctAnswer": 1,
+    "category": "historia",
+    "difficulty": "media",
+    "explanation": "El muro de Berlín cayó el 9 de noviembre de 1989, marcando el inicio de la reunificación alemana."
+  },
+  {
+    "question": "¿Cuál es el planeta más grande del sistema solar?",
+    "options": ["Saturno", "Júpiter", "Neptuno", "Urano"],
+    "correctAnswer": 1,
+    "category": "ciencia",
+    "difficulty": "fácil",
+    "explanation": "Júpiter es el planeta más grande del sistema solar, con una masa dos veces y media la de los demás planetas juntos."
+  },
+  {
+    "question": "¿Quién escribió 'Cien años de soledad'?",
+    "options": ["Julio Cortázar", "Mario Vargas Llosa", "Gabriel García Márquez", "Jorge Luis Borges"],
+    "correctAnswer": 2,
+    "category": "literatura",
+    "difficulty": "media",
+    "explanation": "Gabriel García Márquez, escritor colombiano, publicó 'Cien años de soledad' en 1967."
+  },
+  {
+    "question": "¿Cuál es el océano más grande del mundo?",
+    "options": ["Océano Atlántico", "Océano Índico", "Océano Ártico", "Océano Pacífico"],
+    "correctAnswer": 3,
+    "category": "geografía",
+    "difficulty": "fácil",
+    "explanation": "El océano Pacífico es el más grande, con una superficie de aproximadamente 165 millones de km²."
+  },
+  {
+    "question": "¿Qué artista es conocido como 'El rey del pop'?",
+    "options": ["Elvis Presley", "Michael Jackson", "Prince", "Madonna"],
+    "correctAnswer": 1,
+    "category": "música",
+    "difficulty": "fácil",
+    "explanation": "Michael Jackson fue apodado 'El rey del pop' por su enorme influencia en la música popular."
+  },
+  {
+    "question": "¿Cuántos lados tiene un heptágono?",
+    "options": ["5", "6", "7", "8"],
+    "correctAnswer": 2,
+    "category": "matemáticas",
+    "difficulty": "fácil",
+    "explanation": "Un heptágono es un polígono de siete lados y siete ángulos."
+  },
+  {
+    "question": "¿En qué continente se encuentra Egipto?",
+    "options": ["Asia", "África", "Europa", "América"],
+    "correctAnswer": 1,
+    "category": "geografía",
+    "difficulty": "fácil",
+    "explanation": "Egipto se encuentra en el noreste de África, aunque la península del Sinaí se considera parte de Asia."
+  },
+  {
+    "question": "¿Quién fue el primer presidente de los Estados Unidos?",
+    "options": ["Thomas Jefferson", "John Adams", "George Washington", "Benjamin Franklin"],
+    "correctAnswer": 2,
+    "category": "historia",
+    "difficulty": "fácil",
+    "explanation": "George Washington fue el primer presidente de los Estados Unidos, ejerciendo el cargo desde 1789 hasta 1797."
+  },
+  {
+    "question": "¿Cuál es el metal más conductor de electricidad?",
+    "options": ["Oro", "Aluminio", "Plata", "Cobre"],
+    "correctAnswer": 2,
+    "category": "ciencia",
+    "difficulty": "difícil",
+    "explanation": "La plata es el metal con mayor conductividad eléctrica, seguida del cobre y el oro."
+  },
+  {
+    "question": "¿Qué escritor creó a Harry Potter?",
+    "options": ["J.R.R. Tolkien", "J.K. Rowling", "Stephen King", "George R.R. Martin"],
+    "correctAnswer": 1,
+    "category": "literatura",
+    "difficulty": "fácil",
+    "explanation": "J.K. Rowling es la autora británica de la serie de novelas de Harry Potter."
+  },
+  {
+    "question": "¿Cuál es la capital de Australia?",
+    "options": ["Sídney", "Melbourne", "Canberra", "Perth"],
+    "correctAnswer": 2,
+    "category": "geografía",
+    "difficulty": "media",
+    "explanation": "Canberra fue designada capital de Australia en 1908 como compromiso entre Sídney y Melbourne."
+  },
+  {
+    "question": "¿En qué año llegó el hombre a la Luna por primera vez?",
+    "options": ["1967", "1969", "1971", "1965"],
+    "correctAnswer": 1,
+    "category": "historia",
+    "difficulty": "media",
+    "explanation": "El Apollo 11 aterrizó en la Luna el 20 de julio de 1969, y Neil Armstrong fue el primer humano en pisar su superficie."
+  },
+  {
+    "question": "¿Qué vitamina se produce principalmente mediante la exposición al sol?",
+    "options": ["Vitamina A", "Vitamina C", "Vitamina D", "Vitamina E"],
+    "correctAnswer": 2,
+    "category": "ciencia",
+    "difficulty": "media",
+    "explanation": "La vitamina D se sintetiza en la piel cuando se expone a la radiación ultravioleta B (UVB) de la luz solar."
+  },
+  {
+    "question": "¿Quién compuso 'Las cuatro estaciones'?",
+    "options": ["Wolfgang Amadeus Mozart", "Antonio Vivaldi", "Johann Sebastian Bach", "Ludwig van Beethoven"],
+    "correctAnswer": 1,
+    "category": "música",
+    "difficulty": "media",
+    "explanation": "Antonio Vivaldi compuso 'Las cuatro estaciones', una serie de cuatro conciertos para violín, alrededor de 1723."
+  },
+  {
+    "question": "¿Cuál es el país más grande del mundo por superficie?",
+    "options": ["Canadá", "China", "Estados Unidos", "Rusia"],
+    "correctAnswer": 3,
+    "category": "geografía",
+    "difficulty": "fácil",
+    "explanation": "Rusia es el país más grande del mundo, con una superficie de 17,1 millones de km²."
+  },
+  {
+    "question": "¿Qué filósofo dijo 'Pienso, luego existo'?",
+    "options": ["Friedrich Nietzsche", "René Descartes", "Immanuel Kant", "Sócrates"],
+    "correctAnswer": 1,
+    "category": "filosofía",
+    "difficulty": "media",
+    "explanation": "René Descartes, filósofo francés, acuñó la frase 'Cogito, ergo sum' (Pienso, luego existo) como fundamento del conocimiento."
+  },
+  {
+    "question": "¿En qué deporte se utiliza una red y se anotan 'games' y 'sets'?",
+    "options": ["Fútbol", "Baloncesto", "Tenis", "Voleibol"],
+    "correctAnswer": 2,
+    "category": "deportes",
+    "difficulty": "fácil",
+    "explanation": "El tenis se juega con una red y se anota en puntos, games (juegos) y sets."
+  }
+]

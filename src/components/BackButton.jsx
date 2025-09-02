@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {onClick} from 'react'
 import { Link } from 'react-router-dom'
 
 const BackButton = ({backPath}) => {
   return (
-    <Link to={backPath} className="flex items-center justify-center w-20 h-20 rounded-full 
+    <Link onClick={onClick} to={backPath} className="flex items-center justify-center w-20 h-20 rounded-full 
              bg-yellow-300 text-black shadow-lg 
              hover:bg-yellow-400 
              transition-all duration-300 ease-in-out transform">

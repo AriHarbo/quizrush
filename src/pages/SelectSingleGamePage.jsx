@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import BackgroundSelectMode from '../backgrounds/BackgroundSelectMode'
 import BackButton from '../components/BackButton'
 import SelectSingleCard from '../components/SelectSingleCard'
+import GameScreen from '../components/GameScreen'
 
 const SelectSingleGamePage = () => {
+    // Estado para controlar qué modo se seleccionó
+    const [selectedMode, setSelectedMode] = useState(null);
+    const [finalScore, setFinalScore] = useState(0);
+    const [gameOver, setGameOver] = useState(false);
+  
     const classicIcon = "M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z";
     const classicText = "Answer random questions until your lives run out. Go as far as you can to score big!"
     
@@ -16,6 +22,67 @@ const SelectSingleGamePage = () => {
     const timeIcon = "M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
     const timeText = "Race against the clock! Answer as many questions as you can before time runs out."
 
+    // Función para manejar la selección de modo
+    const handleModeSelect = (mode) => {
+        setSelectedMode(mode);
+        setGameOver(false);
+        setFinalScore(0);
+    };
+
+    // Función para cuando el juego termina
+    const handleGameEnd = (score) => {
+        setGameOver(true);
+        setFinalScore(score);
+        setSelectedMode(null);
+    };
+
+    // Función para volver a la selección de modos
+    const handleBackToModeSelect = () => {
+      console.log("handleBack apretado")
+        setSelectedMode(null);
+        setGameOver(false);
+    };
+
+    // Función para jugar again
+    const handlePlayAgain = () => {
+        setSelectedMode(selectedMode);
+        setGameOver(false);
+    };
+
+    // Si hay un juego en progreso, mostrar el GameScreen
+    if (selectedMode && !gameOver) {
+        return (
+            <GameScreen 
+                onGameEnd={handleGameEnd} 
+                initialLives={3} 
+                mode={selectedMode}
+                onBackToModeSelect={handleBackToModeSelect}
+            />
+        );
+    }
+
+    // Si el juego terminó, mostrar pantalla de Game Over
+    if (gameOver) {
+        return (
+            <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-yellow-400 via-orange-500 to-red-600 relative">
+                <div className="absolute top-10 left-10 w-32 h-32 bg-yellow-300 rounded-full opacity-30"></div>
+                <div className="absolute bottom-20 right-20 w-40 h-40 bg-red-400 rounded-full opacity-30"></div>
+                <div className="bg-white/90 rounded-2xl shadow-2xl p-10 text-center w-full max-w-lg border-2 border-orange-400">
+                  <h2 style={{ fontFamily: '"Fredoka", cursive' }} className="text-3xl font-extrabold text-gray-800 mb-4">Game Over!</h2>
+                  <p style={{ fontFamily: '"Fredoka", cursive' }} className="text-xl text-gray-600 mb-8">Your score: <span className="font-bold text-orange-500">1</span></p>
+
+                  {/* botones */}
+                  <button style={{ fontFamily: '"Fredoka", cursive' }} onClick={handlePlayAgain} className="w-full rounded-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 mb-4 transition text-lg cursor-pointer">
+                    Play Again
+                  </button>
+                  <button style={{ fontFamily: '"Fredoka", cursive' }} onClick={handleBackToModeSelect} className="w-full bg-sky-900 hover:bg-sky-950 text-white font-semibold py-3 rounded-full transition text-lg cursor-pointer">
+                    Try Another Mode
+                  </button>
+                </div>
+            </div>
+        );
+    }
+
     return (
     <div className="bg-yellow-500 relative w-full h-screen overflow-hidden">
       <BackgroundSelectMode/>
@@ -25,11 +92,47 @@ const SelectSingleGamePage = () => {
         <div className="z-40 flex flex-col items-center justify-center min-h-screen text-center">
             <h1 style={{ fontFamily: '"Fredoka", cursive' }} className="z-40 text-5xl lg:text-7xl text-white font-bold mb-8">Choose One Mode</h1>
             
-            <div className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 m-3'>
-                <SelectSingleCard tittleCard="Classic" textCard={classicText} bgCard="bg-orange-400" iconCard={classicIcon} iconColor="orange" bgIconColor="bg-yellow-400"/>
-                <SelectSingleCard tittleCard="Daily" textCard={dailyText} bgCard="bg-orange-600" iconCard={dailyIcon} iconColor="white" bgIconColor="bg-red-600"/>
-                <SelectSingleCard tittleCard="Categories" textCard={categoriesText} bgCard="bg-pink-600" iconCard={categoriesIcon} iconColor="white" bgIconColor="bg-pink-800"/>
-                <SelectSingleCard tittleCard="Time Trial" textCard={timeText} bgCard="bg-red-600" iconCard={timeIcon} iconColor="violet" bgIconColor="bg-red-800"/>
+            <div className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 m-3 items-stretch'>
+                <div className="h-full flex cursor-pointer z-40" onClick={() => handleModeSelect('classic')}>
+                        <SelectSingleCard 
+                            tittleCard="Classic" 
+                            textCard={classicText} 
+                            bgCard="bg-orange-400" 
+                            iconCard={classicIcon} 
+                            iconColor="orange" 
+                            bgIconColor="bg-yellow-400"
+                        />
+                    </div>
+                    <div className="h-full flex cursor-pointer z-40" onClick={() => handleModeSelect('daily')}>
+                        <SelectSingleCard 
+                            tittleCard="Daily" 
+                            textCard={dailyText} 
+                            bgCard="bg-orange-600" 
+                            iconCard={dailyIcon} 
+                            iconColor="white" 
+                            bgIconColor="bg-red-600"
+                        />
+                    </div>
+                    <div className="h-full flex cursor-pointer z-40" onClick={() => handleModeSelect('categories')}>
+                        <SelectSingleCard 
+                            tittleCard="Categories" 
+                            textCard={categoriesText} 
+                            bgCard="bg-pink-600" 
+                            iconCard={categoriesIcon} 
+                            iconColor="white" 
+                            bgIconColor="bg-pink-800"
+                        />
+                    </div>
+                    <div className="h-full flex cursor-pointer z-40" onClick={() => handleModeSelect('time')}>
+                        <SelectSingleCard
+                            tittleCard="Time Trial" 
+                            textCard={timeText} 
+                            bgCard="bg-red-600" 
+                            iconCard={timeIcon} 
+                            iconColor="violet" 
+                            bgIconColor="bg-red-800"
+                        />
+                    </div>
             </div>
         </div>
     </div>
