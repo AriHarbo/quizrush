@@ -8,6 +8,7 @@ const SelectSingleGamePage = () => {
     // Estado para controlar qué modo se seleccionó
     const [selectedMode, setSelectedMode] = useState(null);
     const [finalScore, setFinalScore] = useState(0);
+    const [score, setScore] = useState(0);
     const [gameOver, setGameOver] = useState(false);
   
     const classicIcon = "M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z";
@@ -26,7 +27,7 @@ const SelectSingleGamePage = () => {
     const handleModeSelect = (mode) => {
         setSelectedMode(mode);
         setGameOver(false);
-        setFinalScore(0);
+        setScore(0);
     };
 
     // Función para cuando el juego termina
@@ -53,6 +54,8 @@ const SelectSingleGamePage = () => {
     if (selectedMode && !gameOver) {
         return (
             <GameScreen 
+                score={score}
+                setScore={setScore}
                 onGameEnd={handleGameEnd} 
                 initialLives={3} 
                 mode={selectedMode}
@@ -69,7 +72,7 @@ const SelectSingleGamePage = () => {
                 <div className="absolute bottom-20 right-20 w-40 h-40 bg-red-400 rounded-full opacity-30"></div>
                 <div className="bg-white/90 rounded-2xl shadow-2xl p-10 text-center w-full max-w-lg border-2 border-orange-400">
                   <h2 style={{ fontFamily: '"Fredoka", cursive' }} className="text-3xl font-extrabold text-gray-800 mb-4">Game Over!</h2>
-                  <p style={{ fontFamily: '"Fredoka", cursive' }} className="text-xl text-gray-600 mb-8">Your score: <span className="font-bold text-orange-500">1</span></p>
+                  <p style={{ fontFamily: '"Fredoka", cursive' }} className="text-xl text-gray-600 mb-8">Your score: <span className="font-bold text-orange-500">{finalScore}</span></p>
 
                   {/* botones */}
                   <button style={{ fontFamily: '"Fredoka", cursive' }} onClick={handlePlayAgain} className="w-full rounded-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 mb-4 transition text-lg cursor-pointer">

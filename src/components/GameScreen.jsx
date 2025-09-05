@@ -3,11 +3,10 @@ import { getRandomQuestion, verifyAnswer } from '../services/api';
 import BackgroundSelectMode from '../backgrounds/BackgroundSelectMode'; // Importamos tu background
 import BackButton from '../components/BackButton'; // Importamos el botón de volver
 
-const GameScreen = ({ onGameEnd, initialLives = 3, onBackToModeSelect }) => {
+const GameScreen = ({ score,setScore,onGameEnd, initialLives = 3, onBackToModeSelect }) => {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [loading, setLoading] = useState(true);
   const [lives, setLives] = useState(initialLives);
-  const [score, setScore] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(null);
@@ -46,7 +45,7 @@ const GameScreen = ({ onGameEnd, initialLives = 3, onBackToModeSelect }) => {
       setResult(verification);
 
       if (verification.correct) {
-        setScore(prev => prev + 1);
+        setScore(prev => prev + 100);
         setTimeout(() => {
           loadNewQuestion();
         }, 2000);
