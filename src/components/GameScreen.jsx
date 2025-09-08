@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getRandomQuestion, verifyAnswer } from '../services/api';
 import BackgroundSelectMode from '../backgrounds/BackgroundSelectMode'; // Importamos tu background
 import BackButton from '../components/BackButton'; // Importamos el botón de volver
 
-const GameScreen = ({ score,setScore,onGameEnd, initialLives = 3, onBackToModeSelect }) => {
+const GameScreen = ({ score,mode,setScore,onGameEnd, initialLives = 3, onBackToModeSelect }) => {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [loading, setLoading] = useState(true);
   const [lives, setLives] = useState(initialLives);
@@ -11,10 +11,35 @@ const GameScreen = ({ score,setScore,onGameEnd, initialLives = 3, onBackToModeSe
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(null);
   const [isVerifying, setIsVerifying] = useState(false);
+  const [usedQuestions, setUsedQuestions] = useState([]);
+  const [timeLeft, setTimeLeft] = useState(60);
+
+  const scoreRef = useRef(score);
 
   useEffect(() => {
-    loadNewQuestion();
-  }, []);
+    scoreRef.current = score;
+  }, [score]);
+
+  useEffect(() => {
+    if(mode === "classic"){
+      loadNewQuestion();
+    }
+    if(mode === "time"){
+      loadNewQuestion();
+      const timer = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          onGameEnd(scoreRef.current); // uso ref para obtener el score final
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+    }
+  }, [mode]);
 
   const loadNewQuestion = async () => {
     try {
@@ -23,8 +48,21 @@ const GameScreen = ({ score,setScore,onGameEnd, initialLives = 3, onBackToModeSe
       setShowResult(false);
       setResult(null);
       
-      const question = await getRandomQuestion();
+      let question;
+      let attempts = 0;
+
+      do {
+        question = await getRandomQuestion();
+        attempts++;
+        // Evitamos bucles infinitos si ya usamos todas
+        if (attempts > 50) {
+          alert("No quedan más preguntas disponibles.");
+          return;
+        }
+      }while (usedQuestions.includes(question._id));
+
       setCurrentQuestion(question);
+      setUsedQuestions(prev => [...prev, question._id]);
     } catch (error) {
       console.error('Error loading question:', error);
       alert('Error loading question. Please try again.');
@@ -34,41 +72,48 @@ const GameScreen = ({ score,setScore,onGameEnd, initialLives = 3, onBackToModeSe
   };
 
   const handleAnswerClick = async (answerIndex) => {
-    if (selectedAnswer !== null || isVerifying) return;
-    
-    setSelectedAnswer(answerIndex);
-    setShowResult(true);
-    setIsVerifying(true);
+  if (selectedAnswer !== null || isVerifying) return;
+  
+  setSelectedAnswer(answerIndex);
+  setShowResult(true);
+  setIsVerifying(true);
 
-    try {
-      const verification = await verifyAnswer(currentQuestion._id, answerIndex);
-      setResult(verification);
+  try {
+    const verification = await verifyAnswer(currentQuestion._id, answerIndex);
+    setResult(verification);
 
-      if (verification.correct) {
-        setScore(prev => prev + 100);
+    if (verification.correct) {
+      setScore(prev => prev + 100);
+      setTimeout(() => {
+        loadNewQuestion();
+      }, 2000);
+    } else {
+      if (mode === "classic") {
+        const newLives = lives - 1;
+        setLives(newLives);
+
+        if (newLives === 0) {
+          setTimeout(() => onGameEnd(score), 2000);
+        } else {
+          setTimeout(() => loadNewQuestion(), 2000);
+        }
+      } else if (mode === "time") {
+        setScore(prev => (verification.correct ? prev + 100 : prev - 50));
         setTimeout(() => {
           loadNewQuestion();
         }, 2000);
-      } else {
-        const newLives = lives - 1;
-        setLives(newLives);
-        setTimeout(() => {
-          if (newLives === 0) {
-            onGameEnd(score);
-          } else {
-            loadNewQuestion();
-          }
-        }, 3000);
       }
+    }
     } catch (error) {
-      console.error('Error verifying answer:', error);
-      alert('Error verifying answer. Please try again.');
+      console.error("Error verifying answer:", error);
+      alert("Error verifying answer. Please try again.");
       setSelectedAnswer(null);
       setShowResult(false);
     } finally {
       setIsVerifying(false);
     }
   };
+
 
   const getAnswerClass = (index) => {
     if (!showResult || !result) {
@@ -139,10 +184,18 @@ const GameScreen = ({ score,setScore,onGameEnd, initialLives = 3, onBackToModeSe
           
           {/* Header con vidas y puntaje */}
           <div className="flex justify-between items-center mb-8">
-            <div className="flex items-center space-x-3">
-              <span className="text-red-500 text-2xl">❤️</span>
-              <span className="text-xl font-bold text-gray-800">Lives: {lives}</span>
-            </div>
+            {mode === "classic" && (
+              <div className="flex items-center space-x-3">
+                <span className="text-red-500 text-2xl">❤️</span>
+                <span className="text-xl font-bold text-gray-800">Lives: {lives}</span>
+              </div>
+            )}
+            {mode === "time" && (
+              <div className="flex items-center space-x-3">
+                <span className="text-blue-500 text-2xl">⏳</span>
+                <span className="text-xl font-bold text-gray-800">Time: {timeLeft}</span>
+              </div>
+            )}
             <div className="text-xl font-bold text-gray-800">Score: {score}</div>
           </div>
 
